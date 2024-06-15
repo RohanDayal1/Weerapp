@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                     String weatherInfo = "Temperatuur: " + (weatherResponse.main.temp - 273.15) + "°C\n" +
                             "Luchtvochtigheid: " + weatherResponse.main.humidity + "%\n" +
                             "Wind Directie: " + convertDegreeToDirection(weatherResponse.wind.deg) + "\n" +
-                            "Wind Snelheid: " + weatherResponse.wind.speed + " m/s\n" +
+                            "Wind Snelheden: " + weatherResponse.wind.speed + " m/s\n" +
                             "Regen: " + (weatherResponse.weather[0].main.equals("Rain") ? "Ja" : "Nee");
                     weatherTextView.setText(weatherInfo);
                 } else {

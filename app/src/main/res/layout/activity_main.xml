@@ -6,33 +6,70 @@
     tools:context=".MainActivity"
     android:background="#F9F7F7">
 
-    <EditText
-        android:id="@+id/cityEditText"
-        android:layout_width="match_parent"
+    <!-- Logo Image -->
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Stad"
-        android:layout_below="@id/loginButton"
-        android:layout_margin="16dp"
-        android:visibility="gone" />
+        android:src="@drawable/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:contentDescription="Logo.png" />
 
+    <!-- App Name -->
     <TextView
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/RohanD"
-        android:textSize="18sp"
+        android:text="Weerapp"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:layout_below="@id/logoImageView"
         android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true" />
 
+    <!-- Registration Section -->
+
+    <TextView
+        android:id="@+id/nameTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logoImageView"
+        android:layout_marginLeft="169dp"
+        android:layout_marginTop="320dp"
+        android:text="@string/RohanD"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
     <EditText
         android:id="@+id/registerUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Registratie Gebruikersnaam"
         android:layout_below="@id/nameTextView"
-        android:layout_margin="16dp" />
+        android:layout_margin="16dp"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        android:elevation="4dp"
+        android:hint="Gebruikersnaam"
+        android:textColorHint="#808080" />
+
+    <EditText
+        android:id="@+id/registerPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/registerUsername"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        android:elevation="4dp"
+        android:hint="Wachtwoord"
+        android:inputType="textPassword"
+        android:textColorHint="#808080" />
+
+
 
     <Button
         android:id="@+id/registerButton"
@@ -40,32 +77,31 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/registerPassword"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
         android:text="Registreer"
+        android:textColor="#FFFFFF"
         android:backgroundTint="#522549" />
 
-    <Button
-        android:id="@+id/getWeatherButton"
-        android:layout_width="wrap_content"
+    <!-- Login Section -->
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Haal Weer op"
-        android:layout_below="@id/cityEditText"
+        android:layout_below="@id/registerButton"
         android:layout_margin="16dp"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone"
-        android:backgroundTint="#522549" />
+        android:hint="Gebruikersnaam"
+        android:textColorHint="#808080"
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Wachtwoord"
-        android:inputType="textPassword"
         android:layout_below="@id/username"
         android:layout_margin="16dp"
+        android:hint="Wachtwoord"
+        android:inputType="textPassword"
+        android:textColorHint="#808080"
         android:visibility="gone" />
 
     <Button
@@ -74,46 +110,44 @@
         android:layout_height="wrap_content"
         android:text="Inloggen"
         android:layout_below="@id/password"
-        android:layout_margin="16dp"
         android:layout_centerHorizontal="true"
-        android:visibility="gone"
-        android:backgroundTint="#522549" />
+        android:layout_marginTop="16dp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#522549"
+        android:visibility="gone" />
 
+    <!-- Weather Section -->
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/cityEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Gebruikersnaam"
-        android:layout_below="@id/registerButton"
+        android:hint="Voer stad in"
+        android:layout_below="@id/loginButton"
         android:layout_margin="16dp"
         android:visibility="gone" />
 
-    <EditText
-        android:id="@+id/registerPassword"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/getWeatherButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Registratie Wachtwoord"
-        android:inputType="textPassword"
-        android:layout_below="@id/registerUsername"
-        android:layout_margin="16dp" />
+        android:text="Haal Weer Op"
+        android:layout_below="@id/cityEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#522549"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/weatherTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Weer Info"
+        android:text="Weer Informatie"
         android:layout_below="@id/getWeatherButton"
+        android:layout_centerHorizontal="true"
         android:layout_margin="16dp"
-        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:textStyle="bold"
         android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/logoImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:contentDescription="@string/logo_desc" />
 
 </RelativeLayout>
