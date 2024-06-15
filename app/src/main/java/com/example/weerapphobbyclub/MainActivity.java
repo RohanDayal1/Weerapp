@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set status bar color
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.parseColor("#9D3A42"));
+            getWindow().setStatusBarColor(Color.parseColor("#522549"));
         }
 
         // Initialize UI components
