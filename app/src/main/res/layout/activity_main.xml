@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/logoImageView"
         android:layout_marginLeft="169dp"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="339dp"
         android:text="@string/RohanD"
         android:textSize="20sp"
         android:textStyle="bold" />

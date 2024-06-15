@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView nameTextView;
 
     private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/";
-    private static final String API_KEY = "f55ab058c1a2e947271915a95258411f";
+    private static final String API_KEY = "19dd586c3fbfbed6a31ff5a9ad23f72e";
     private static final String TAG = "MainActivity";
 
     private HashMap<String, String> userDatabase = new HashMap<>();
@@ -141,11 +141,15 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     WeatherResponse weatherResponse = response.body();
-                    String weatherInfo = "Temperatuur: " + (weatherResponse.main.temp - 273.15) + "°C\n" +
-                            "Luchtvochtigheid: " + weatherResponse.main.humidity + "%\n" +
-                            "Wind Directie: " + convertDegreeToDirection(weatherResponse.wind.deg) + "\n" +
+
+                    // Temperatuur conversie naar Celsius en afronding tot 1 decimaal
+                    double temperatureCelsius = weatherResponse.main.temp - 273.15;
+                    String formattedTemperature = String.format("%.1f", temperatureCelsius);
+
+                    String weatherInfo = "Temperatuur: " + formattedTemperature + "°C\n" +
+                            "Regen: " + (weatherResponse.weather[0].main.equals("Rain") ? "Ja" : "Nee") + "\n" +
                             "Wind Snelheden: " + weatherResponse.wind.speed + " m/s\n" +
-                            "Regen: " + (weatherResponse.weather[0].main.equals("Rain") ? "Ja" : "Nee");
+                            "Wind Directie: " + convertDegreeToDirection(weatherResponse.wind.deg);
                     weatherTextView.setText(weatherInfo);
                 } else {
                     Toast.makeText(MainActivity.this, "Fout bij het ophalen van de gegevens", Toast.LENGTH_SHORT).show();
