@@ -27,22 +27,22 @@ import retrofit2.http.Query;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText registerUsernameEditText;
-    private EditText registerPasswordEditText;
-    private Button registerButton;
-    private EditText usernameEditText;
-    private EditText passwordEditText;
-    private Button loginButton;
-    private EditText cityEditText;
-    private Button getWeatherButton;
-    private TextView weatherTextView;
-    private TextView nameTextView;
+    private EditText etRegisterUsername;
+    private EditText etRegisterPassword;
+    private Button btnRegister;
+    private EditText etUsername;
+    private EditText etPassword;
+    private Button btnLogin;
+    private EditText etCity;
+    private Button btnFetchWeather;
+    private TextView tvWeatherInfo;
+    private TextView tvUsername;
 
-    private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/";
+    private static final String API_BASE_URL = "https://api.openweathermap.org/data/2.5/";
     private static final String API_KEY = "19dd586c3fbfbed6a31ff5a9ad23f72e";
     private static final String TAG = "MainActivity";
 
-    private HashMap<String, String> userDatabase = new HashMap<>();
+    private HashMap<String, String> userCredentials = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,69 +55,69 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Initialize UI components
-        registerUsernameEditText = findViewById(R.id.registerUsername);
-        registerPasswordEditText = findViewById(R.id.registerPassword);
-        registerButton = findViewById(R.id.registerButton);
-        usernameEditText = findViewById(R.id.username);
-        passwordEditText = findViewById(R.id.password);
-        loginButton = findViewById(R.id.loginButton);
-        cityEditText = findViewById(R.id.cityEditText);
-        getWeatherButton = findViewById(R.id.getWeatherButton);
-        weatherTextView = findViewById(R.id.weatherTextView);
-        nameTextView = findViewById(R.id.nameTextView);
+        etRegisterUsername = findViewById(R.id.registerUsername);
+        etRegisterPassword = findViewById(R.id.registerPassword);
+        btnRegister = findViewById(R.id.registerButton);
+        etUsername = findViewById(R.id.username);
+        etPassword = findViewById(R.id.password);
+        btnLogin = findViewById(R.id.loginButton);
+        etCity = findViewById(R.id.cityEditText);
+        btnFetchWeather = findViewById(R.id.getWeatherButton);
+        tvWeatherInfo = findViewById(R.id.weatherTextView);
+        tvUsername = findViewById(R.id.nameTextView);
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = registerUsernameEditText.getText().toString();
-                String password = registerPasswordEditText.getText().toString();
+                String username = etRegisterUsername.getText().toString();
+                String password = etRegisterPassword.getText().toString();
 
                 if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Vul alle velden in", Toast.LENGTH_SHORT).show();
-                } else if (userDatabase.containsKey(username)) {
+                } else if (userCredentials.containsKey(username)) {
                     Toast.makeText(MainActivity.this, "Gebruikersnaam is al geregistreerd", Toast.LENGTH_SHORT).show();
                 } else {
-                    userDatabase.put(username, password);
+                    userCredentials.put(username, password);
                     Toast.makeText(MainActivity.this, "Registratie succesvol", Toast.LENGTH_SHORT).show();
-                    registerUsernameEditText.setVisibility(View.GONE);
-                    registerPasswordEditText.setVisibility(View.GONE);
-                    registerButton.setVisibility(View.GONE);
+                    etRegisterUsername.setVisibility(View.GONE);
+                    etRegisterPassword.setVisibility(View.GONE);
+                    btnRegister.setVisibility(View.GONE);
 
-                    usernameEditText.setVisibility(View.VISIBLE);
-                    passwordEditText.setVisibility(View.VISIBLE);
-                    loginButton.setVisibility(View.VISIBLE);
+                    etUsername.setVisibility(View.VISIBLE);
+                    etPassword.setVisibility(View.VISIBLE);
+                    btnLogin.setVisibility(View.VISIBLE);
                 }
             }
         });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = usernameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
+                String username = etUsername.getText().toString();
+                String password = etPassword.getText().toString();
 
                 if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Vul alle velden in", Toast.LENGTH_SHORT).show();
-                } else if (!userDatabase.containsKey(username) || !userDatabase.get(username).equals(password)) {
+                } else if (!userCredentials.containsKey(username) || !userCredentials.get(username).equals(password)) {
                     Toast.makeText(MainActivity.this, "Onjuiste gebruikersnaam of wachtwoord", Toast.LENGTH_SHORT).show();
                 } else {
-                    usernameEditText.setVisibility(View.GONE);
-                    passwordEditText.setVisibility(View.GONE);
-                    loginButton.setVisibility(View.GONE);
+                    etUsername.setVisibility(View.GONE);
+                    etPassword.setVisibility(View.GONE);
+                    btnLogin.setVisibility(View.GONE);
 
-                    cityEditText.setVisibility(View.VISIBLE);
-                    getWeatherButton.setVisibility(View.VISIBLE);
-                    weatherTextView.setVisibility(View.VISIBLE);
+                    etCity.setVisibility(View.VISIBLE);
+                    btnFetchWeather.setVisibility(View.VISIBLE);
+                    tvWeatherInfo.setVisibility(View.VISIBLE);
                 }
             }
         });
 
-        getWeatherButton.setOnClickListener(new View.OnClickListener() {
+        btnFetchWeather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String city = cityEditText.getText().toString();
+                String city = etCity.getText().toString();
                 if (!city.isEmpty()) {
-                    getWeatherData(city);
+                    fetchWeatherData(city);
                 } else {
                     Toast.makeText(MainActivity.this, "Voer een stad in", Toast.LENGTH_SHORT).show();
                 }
@@ -125,32 +125,32 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void getWeatherData(String city) {
+    private void fetchWeatherData(String cityName) {
         Gson gson = new GsonBuilder().create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(API_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        WeatherService service = retrofit.create(WeatherService.class);
-        Call<WeatherResponse> call = service.getWeather(city, API_KEY);
+        WeatherService weatherService = retrofit.create(WeatherService.class);
+        Call<WeatherResponse> weatherCall = weatherService.getWeather(cityName, API_KEY);
 
-        call.enqueue(new Callback<WeatherResponse>() {
+        weatherCall.enqueue(new Callback<WeatherResponse>() {
             @Override
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     WeatherResponse weatherResponse = response.body();
 
-                    // Temperatuur conversie naar Celsius en afronding tot 1 decimaal
-                    double temperatureCelsius = weatherResponse.main.temp - 273.15;
-                    String formattedTemperature = String.format("%.1f", temperatureCelsius);
+                    // Convert temperature to Celsius and round to 1 decimal place
+                    double tempCelsius = weatherResponse.main.temp - 273.15;
+                    String formattedTemp = String.format("%.1f", tempCelsius);
 
-                    String weatherInfo = "Temperatuur: " + formattedTemperature + "°C\n" +
+                    String weatherDetails = "Temperatuur: " + formattedTemp + "°C\n" +
                             "Regen: " + (weatherResponse.weather[0].main.equals("Rain") ? "Ja" : "Nee") + "\n" +
-                            "Wind Snelheden: " + weatherResponse.wind.speed + " m/s\n" +
-                            "Wind Directie: " + convertDegreeToDirection(weatherResponse.wind.deg);
-                    weatherTextView.setText(weatherInfo);
+                            "Wind Snelheid: " + weatherResponse.wind.speed + " m/s\n" +
+                            "Wind Richting: " + convertDegreeToDirection(weatherResponse.wind.deg);
+                    tvWeatherInfo.setText(weatherDetails);
                 } else {
                     Toast.makeText(MainActivity.this, "Fout bij het ophalen van de gegevens", Toast.LENGTH_SHORT).show();
                     Log.e(TAG, "Response code: " + response.code());
@@ -172,8 +172,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String convertDegreeToDirection(float degree) {
-        String[] directions = {"N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
-                "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"};
+        String[] directions = {"N", "NNO", "NO", "ONO", "O", "OZO", "ZO", "ZZO",
+                "Z", "ZZW", "ZW", "WZW", "W", "WNW", "NW", "NNW"};
         int index = Math.round(degree / 22.5f) % 16;
         return directions[index];
     }

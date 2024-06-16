@@ -29,7 +29,6 @@
         android:layout_centerHorizontal="true" />
 
     <!-- Registration Section -->
-
     <TextView
         android:id="@+id/nameTextView2"
         android:layout_width="wrap_content"
@@ -58,18 +57,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/registerUsername"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_margin="16dp"
         android:padding="12dp"
         android:background="@drawable/edittext_background"
         android:elevation="4dp"
         android:hint="Wachtwoord"
         android:inputType="textPassword"
         android:textColorHint="#808080" />
-
-
 
     <Button
         android:id="@+id/registerButton"
@@ -89,6 +83,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/registerButton"
         android:layout_margin="16dp"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        android:elevation="4dp"
         android:hint="Gebruikersnaam"
         android:textColorHint="#808080"
         android:visibility="gone" />
@@ -99,6 +96,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/username"
         android:layout_margin="16dp"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        android:elevation="4dp"
         android:hint="Wachtwoord"
         android:inputType="textPassword"
         android:textColorHint="#808080"
@@ -121,10 +121,14 @@
         android:id="@+id/cityEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Voer stad in"
-        android:layout_below="@id/loginButton"
         android:layout_margin="16dp"
-        android:visibility="gone" />
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        android:elevation="4dp"
+        android:hint="Voer stad in"
+        android:textColorHint="#808080"
+        android:layout_below="@id/loginButton"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/getWeatherButton"
