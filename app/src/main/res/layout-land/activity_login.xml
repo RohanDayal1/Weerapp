@@ -2,17 +2,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistrationActivity"
+    tools:context=".LoginActivity"
     android:background="#F9F7F7">
 
     <ImageView
         android:id="@+id/logoImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo"
+        android:layout_width="114dp"
+        android:layout_height="87dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
-        android:contentDescription="Logo.png" />
+        android:contentDescription="Logo.png"
+        android:src="@drawable/logo" />
 
     <TextView
         android:id="@+id/nameTextView"
@@ -26,22 +26,24 @@
         android:layout_centerHorizontal="true" />
 
     <EditText
-        android:id="@+id/registerUsername"
+        android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/nameTextView"
         android:layout_margin="16dp"
-        android:padding="12dp"
+        android:layout_marginTop="-7dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/edittext_background"
         android:elevation="4dp"
         android:hint="Gebruikersnaam"
+        android:padding="12dp"
         android:textColorHint="#808080" />
 
     <EditText
-        android:id="@+id/registerPassword"
+        android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/registerUsername"
+        android:layout_below="@id/username"
         android:layout_margin="16dp"
         android:padding="12dp"
         android:background="@drawable/edittext_background"
@@ -51,24 +53,24 @@
         android:textColorHint="#808080" />
 
     <Button
-        android:id="@+id/registerButton"
+        android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/registerPassword"
+        android:text="Inloggen"
+        android:layout_below="@id/password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Registreer"
         android:textColor="#FFFFFF"
         android:backgroundTint="#522549" />
-
     <TextView
         android:id="@+id/nameTextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/logoImageView"
-        android:layout_marginLeft="169dp"
-        android:layout_marginTop="339dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="-104dp"
         android:text="@string/RohanD"
         android:textSize="20sp"
         android:textStyle="bold" />
+
 </RelativeLayout>
